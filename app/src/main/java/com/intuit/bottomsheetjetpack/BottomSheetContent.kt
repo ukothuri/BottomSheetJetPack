@@ -2,19 +2,36 @@ package com.intuit.bottomsheetjetpack
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
 /**
- * Displays the content for a bottom sheet.
+ * Displays a bottom sheet with a top section containing a title and icon, and a bottom section
+ * with a text field and action buttons.
  */
 @Composable
 fun BottomSheetContent() {
@@ -27,15 +44,15 @@ fun BottomSheetContent() {
 }
 
 /**
- * Displays the top section of the bottom sheet with centered content and an end icon.
+ * Represents the top section of the bottom sheet, featuring centered title and icon.
  */
 @Composable
 fun TopSection() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(60.dp)
-            .background(Color.White)
+            .height(TOP_SECTION_HEIGHT)
+            .background(PRIMARY_WHITE)
     ) {
         CenteredTitleAndIcon(Modifier.align(Alignment.Center))
         EndIcon(Modifier.align(Alignment.CenterEnd))
@@ -43,7 +60,7 @@ fun TopSection() {
 }
 
 /**
- * Displays a centered title and icon.
+ * Displays the centered title and icon in the top section.
  */
 @Composable
 fun CenteredTitleAndIcon(modifier: Modifier = Modifier) {
@@ -53,11 +70,11 @@ fun CenteredTitleAndIcon(modifier: Modifier = Modifier) {
     ) {
         Image(
             painter = painterResource(id = R.drawable.ai), // Replace with your drawable
-            contentDescription = "AI Icon",
-            modifier = Modifier.size(19.45.dp)
+            contentDescription = AppStrings.ACCURACY_CHECK,
+            modifier = Modifier.size(ICON_SIZE)
         )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text("Accuracy Check")
+        Spacer(modifier = Modifier.width(ACTION_BUTTON_SPACING))
+        Text(AppStrings.ACCURACY_CHECK)
     }
 }
 
@@ -69,23 +86,20 @@ fun EndIcon(modifier: Modifier = Modifier) {
     Image(
         painter = painterResource(id = R.drawable.ai), // Replace with your drawable
         contentDescription = "Menu Icon",
-        modifier = modifier.size(19.45.dp)
+        modifier = modifier.size(ICON_SIZE)
     )
 }
 
 /**
- * Displays the bottom section of the bottom sheet.
- *
- * @param text The current text.
- * @param onTextChange Function to handle text changes.
+ * Represents the bottom section of the bottom sheet, containing a text field and action buttons.
  */
 @Composable
 fun BottomSection(text: String, onTextChange: (String) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(328.dp)
-            .background(Color(0xFF00796B)) // Teal 700 color
+            .height(BOTTOM_SECTION_HEIGHT)
+            .background(TEAL_700)
             .padding(10.dp)
     ) {
         BottomContent(text, onTextChange)
@@ -93,19 +107,19 @@ fun BottomSection(text: String, onTextChange: (String) -> Unit) {
 }
 
 /**
- * Displays the content of the bottom section.
+ * Displays the content inside the bottom section, including a TextField for user input and action buttons.
  */
 @Composable
 fun BottomContent(text: String, onTextChange: (String) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(PRIMARY_WHITE)
             .padding(10.dp)
     ) {
-        Text("1098 MORTGAGE INTEREST", modifier = Modifier.padding(bottom = 8.dp))
-        Text("Who received your mortgage payments? It could be a bank, credit union, or other lender.")
-        Text("Enter recipient/lendor name", modifier = Modifier.padding(top = 8.dp))
+        Text(AppStrings.MORTGAGE_INTEREST, modifier = Modifier.padding(bottom = 8.dp))
+        Text(AppStrings.MORTGAGE_DETAIL)
+        Text(AppStrings.RECIPIENT_NAME, modifier = Modifier.padding(top = 8.dp))
 
         TextField(
             value = text,
@@ -119,7 +133,7 @@ fun BottomContent(text: String, onTextChange: (String) -> Unit) {
 }
 
 /**
- * Displays action buttons.
+ * Displays action buttons for the bottom sheet.
  */
 @Composable
 fun ActionButtons() {
@@ -130,14 +144,14 @@ fun ActionButtons() {
         horizontalArrangement = Arrangement.End
     ) {
         Button(onClick = { /* Skip action */ }) {
-            Text("Skip")
+            Text(AppStrings.SKIP)
         }
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.width(ACTION_BUTTON_SPACING))
         Button(
             onClick = { /* Update action */ },
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Blue)
+            colors = ButtonDefaults.buttonColors(backgroundColor = PRIMARY_BLUE)
         ) {
-            Text("Update", color = Color.White)
+            Text(AppStrings.UPDATE, color = PRIMARY_WHITE)
         }
     }
 }
