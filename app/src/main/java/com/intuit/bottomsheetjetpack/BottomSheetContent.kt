@@ -99,7 +99,7 @@ fun BottomSection(text: String, onTextChange: (String) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .height(BOTTOM_SECTION_HEIGHT)
-            .background(TEAL_700)
+            .background(LIGHT_BLUE_GRAY)
             .padding(10.dp)
     ) {
         BottomContent(text, onTextChange)

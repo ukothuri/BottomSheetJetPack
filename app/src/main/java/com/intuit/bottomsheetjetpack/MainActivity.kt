@@ -15,25 +15,25 @@ import kotlinx.coroutines.launch
 
 /**
  * MainActivity is the entry point of the application.
- * It sets up the main content view with the MainScreen composable function.
+ * It sets up the main content view with the BottomSheetScreen composable function.
  */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen()
+            BottomSheetScreen()
         }
     }
 }
 
 /**
- * MainScreen is the primary composable function for the application.
+ * BottomSheetScreen is the primary composable function for the application.
  * It sets up a ModalBottomSheetLayout and a button to toggle the bottom sheet's visibility.
  * It also includes a LaunchedEffect to show a toast message when the bottom sheet is dismissed.
  */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MainScreen() {
+fun BottomSheetScreen() {
     // Context used for showing toast messages
     val context = LocalContext.current
     // State for the modal bottom sheet

@@ -10,6 +10,6 @@ val BOTTOM_SECTION_HEIGHT = 328.dp
 val ACTION_BUTTON_SPACING = 8.dp
 
 // Colors
-val TEAL_700 = Color(0xFF00796B)
+val LIGHT_BLUE_GRAY = Color(0xFFF0F4F6)
 val PRIMARY_WHITE = Color.White
 val PRIMARY_BLUE = Color.Blue

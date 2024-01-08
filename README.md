@@ -22,7 +22,7 @@ To run this project, follow these steps:
 
 ## Usage
 
-The `MainActivity` sets the content view to `MainScreen`, which includes a button to toggle the visibility of the bottom sheet. The `BottomSheetContent` composable is used to define the content of the bottom sheet.
+The `MainActivity` sets the content view to `BottomSheetScreen`, which includes a button to toggle the visibility of the bottom sheet. The `BottomSheetContent` composable is used to define the content of the bottom sheet.
 
 Example usage in `MainActivity`:
 ```kotlin
@@ -30,14 +30,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen()
+            BottomSheetScreen()
         }
     }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MainScreen() {
+fun BottomSheetScreen() {
     // ... Implementation details ...
 }
 ```
