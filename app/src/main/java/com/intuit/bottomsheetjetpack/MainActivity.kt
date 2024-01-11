@@ -1,78 +1,45 @@
 package com.intuit.bottomsheetjetpack
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
 
 /**
- * MainActivity is the entry point of the application.
- * It sets up the main content view with the BottomSheetScreen composable function.
+ * The main activity for the application. It sets up the UI for the main screen.
  */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            BottomSheetScreen()
+            MainScreen()
         }
     }
 }
 
 /**
- * BottomSheetScreen is the primary composable function for the application.
- * It sets up a ModalBottomSheetLayout and a button to toggle the bottom sheet's visibility.
- * It also includes a LaunchedEffect to show a toast message when the bottom sheet is dismissed.
+ * The main screen composable function.
+ * It displays a button that triggers the display of a bottom sheet.
  */
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun BottomSheetScreen() {
-    // Context used for showing toast messages
-    val context = LocalContext.current
-    // State for the modal bottom sheet
-    val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
-    // Coroutine scope for launching side effects
-    val coroutineScope = rememberCoroutineScope()
+fun MainScreen() {
+    // Controller for managing the bottom sheet
+    val bottomSheetController = remember { BottomSheetController() }
 
-    // Observe changes in the bottom sheet's visibility to show a toast when it's dismissed
-    LaunchedEffect(sheetState.currentValue) {
-        if (sheetState.currentValue == ModalBottomSheetValue.Hidden) {
-            Toast.makeText(context, "Bottom Sheet Dismissed", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    // Layout definition for the screen
-    ModalBottomSheetLayout(
-        sheetState = sheetState,
-        sheetContent = {
-            BottomSheetContent()
-            Spacer(modifier = Modifier.height(300.dp))
-        }
+    // Button that triggers the bottom sheet
+    Button(
+        onClick = { bottomSheetController.show() },
+        modifier = Modifier.padding(16.dp)
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxSize()
-        ) {
-            // Button to toggle the visibility of the bottom sheet
-            Button(onClick = {
-                coroutineScope.launch {
-                    if (sheetState.isVisible) {
-                        sheetState.hide()
-                    } else {
-                        sheetState.show()
-                    }
-                }
-            }) {
-                Text("Toggle Bottom Sheet")
-            }
-        }
+        Text("Open Bottom Sheet")
     }
+
+    // Bottom sheet handler composable
+    BottomSheetHandler(bottomSheetController)
 }
