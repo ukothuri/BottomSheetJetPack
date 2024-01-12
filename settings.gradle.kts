@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "BottomSheetJetPack"
 include(":app")
- 
+include(":genux")
