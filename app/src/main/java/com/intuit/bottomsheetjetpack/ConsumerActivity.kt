@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 /**
  * The main activity for the application. It sets up the UI for the main screen.
  */
-class MainActivity : ComponentActivity() {
+class ConsumerActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
